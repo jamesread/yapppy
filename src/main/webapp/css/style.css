@@ -1,0 +1,57 @@
+.severity {
+	font-weight: bold;
+}
+
+li.issue {
+	padding: .2em;
+}
+
+thead {
+	text-align: left;
+}
+
+.severity.WARNING {
+	color: orange;
+} 
+
+.severity.INFO {
+	color: blue;
+}
+
+.severity.ERROR {
+	color: red;
+}
+
+.description {
+	width: 40%;
+}
+
+.actionButtons {
+	text-align: center;
+}
+
+button:disabled {
+	cursor: disabled;
+} 
+
+
+col.ignoreActions {
+	text-align: center;
+	align: center;
+}	
+
+button {
+	padding-left: 1em;
+	padding-right: 1em;  
+	padding-top: .5em;
+	padding-bottom: .5em;
+	margin: .2em;
+	font-weight: bold;
+}
+
+button:disabled {
+	background-color: #e5e5e5;
+	color: #999;
+	border: 1px solid #d2d2d2;
+	cursor: not-allowed;
+}

@@ -1,0 +1,62 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+	<link rel = "stylesheet" type = "text/css" href = "${rootURL}/plugin/yappy/css/style.css" /> 
+
+	<j:set var = "views" value = "${it.owner.views}" />
+	<j:set var = "currentView" value = "${it}" />
+	
+	<st:include page = "viewTabs.jelly" it = "${it.owner.viewsTabBar}" />
+	
+	<j:choose>
+		<j:when test = "${empty(it.items)}">
+			<st:include page = "noJob.jelly" />
+		</j:when>
+		<j:otherwise>
+			<div class = "pane-frame">
+				<table class = "sortable pane bigtable striped-odd">
+					<thead>
+						<tr class = "header">
+							<th>Severity</th>
+							<th tooltip = "What generated this issue?">Source</th>
+							<th class = "description">Description</th> 
+							<th class = "actionButtons" tooltip = "If you don't want to see an issue anymore, ignore it to stop it showing again">Ignore</th>
+							<th>More info</th>
+						</tr>
+					</thead>
+					 
+					<tbody>
+					<j:forEach var = "issue" items = "${it.issues}">
+						<tr class = "issue ${issue.severity}">
+							<td class = "severity ${issue.severity}">${issue.severity}</td>
+							<td class = "source">
+								<j:choose>
+									<j:when test = "${empty(issue.sourceUrl)}">
+										-
+									</j:when>
+									<j:otherwise>
+										<a href = "${rootURL}/${issue.sourceUrl}">${issue.sourceName}</a>
+									</j:otherwise>
+								</j:choose>
+							</td>
+							<td class = "description">${issue.description}</td>
+							<td class = "actionButtons">
+								<button disabled = "disabled" tooltip = "Ignore ${issue.name} issues from this source only">Instance</button>
+								<button disabled = "disabled" tooltip = "Ignore all ${issue.name} issues from anywhere">Type</button>
+							</td>
+							<td>
+								<j:choose>
+									<j:when test = "${empty(issue.infoUrl)}">
+										${issue.name}
+									</j:when>
+									<j:otherwise>
+										<a href = "${rootURL}/${issue.infoUrl}">${issue.name}</a>
+									</j:otherwise>
+								</j:choose>
+							</td>
+						</tr>
+					</j:forEach>
+					</tbody>
+				</table>
+			</div>			
+		</j:otherwise> 
+	</j:choose>
+</j:jelly>
