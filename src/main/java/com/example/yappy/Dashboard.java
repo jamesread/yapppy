@@ -2,11 +2,13 @@ package com.example.yappy;
 
 import hudson.Extension;
 import hudson.model.ListView;
+import hudson.model.ViewDescriptor;
 
 import java.util.Vector;
 
 import jenkins.model.ModelObjectWithContextMenu.ContextMenu;
 
+import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
@@ -14,8 +16,22 @@ import com.example.yappy.Issue.Severity;
 
 @Extension
 public class Dashboard extends ListView {
+
+	@Extension
+	public static final class DescriptorImpl extends ViewDescriptor {
+		@Override
+		public String getDisplayName() {
+			return "Yappy";
+		}
+	}
+
 	public Dashboard() {
 		super("Yappy");
+	}
+
+	@DataBoundConstructor
+	public Dashboard(String name) {
+		super(name);
 	}
 
 	@Override
