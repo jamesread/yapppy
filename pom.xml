@@ -15,9 +15,9 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>hpi</packaging>
 
-  <name>TODO Plugin</name>
-  <description>TODO</description>
-  <url>https://wiki.jenkins-ci.org/display/JENKINS/TODO+Plugin</url>
+  <name>Yappy</name>
+  <description>Yappy - A Jenkins plugin that runs around checking for best practice</description>
+  <url>http://github.com/jamesread/yappy</url>
   <licenses>
     <license>
       <name>MIT License</name>
