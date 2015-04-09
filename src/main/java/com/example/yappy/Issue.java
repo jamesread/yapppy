@@ -38,6 +38,10 @@ public class Issue {
 		this.severity = severity;
 	}
 
+	public void addTo(Scanner scanner) {
+		scanner.addIssue(this);
+	}
+
 	public String getDescription() {
 		return this.description;
 	}

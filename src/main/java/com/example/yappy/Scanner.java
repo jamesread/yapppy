@@ -6,6 +6,7 @@ import hudson.model.Job;
 import java.util.Vector;
 
 import com.example.yappy.checkers.CheckerConsiderFoldersPlugin;
+import com.example.yappy.checkers.CheckerLatestBuildIsSuccssful;
 import com.example.yappy.checkers.CheckerProjectNameDoesntContainFoo;
 import com.example.yappy.checkers.CheckerProjectUsesSourceControl;
 
@@ -18,6 +19,7 @@ public class Scanner {
 		this.checkers.add(new CheckerConsiderFoldersPlugin());
 		this.checkers.add(new CheckerProjectNameDoesntContainFoo());
 		this.checkers.add(new CheckerProjectUsesSourceControl());
+		this.checkers.add(new CheckerLatestBuildIsSuccssful());
 	}
 
 	public void addIssue(Issue i) {
