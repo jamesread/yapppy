@@ -3,15 +3,27 @@
 
 	<j:set var = "views" value = "${it.owner.views}" />
 	<j:set var = "currentView" value = "${it}" />
+	<j:set var = "scanner" value = "${it.newScanner}" />
 	
 	<st:include page = "viewTabs.jelly" it = "${it.owner.viewsTabBar}" />
-	
+
 	<j:choose>
 		<j:when test = "${empty(it.items)}">
 			<st:include page = "noJob.jelly" />
 		</j:when>
 		<j:otherwise>
 			<div class = "pane-frame">
+			    <j:choose>
+			        <j:when test = "${empty(it.exception)}">
+			            <!-- yay !-->
+			        </j:when>
+			        <j:otherwise>
+                        <div class = "exception">
+                            ${it.exception}
+                        </div>
+                    </j:otherwise>
+                </j:choose>
+
 				<table class = "sortable pane bigtable striped-odd">
 					<thead>
 						<tr class = "header">
@@ -58,7 +70,13 @@
 				</table>
 
 				<div class = "footer">
-					${it.issues.length} issues found. Yappy ${it.version}.
+				    <div class = "summary">
+					    <strong>${it.issues.size()}</strong> issues found, <strong>${it.checkers.size()}</strong> scanning <abbr title = "Checkers: ${it.checkerList}">checkers</abbr> were run.
+					</div>
+
+                    <div class = "pluginInfo">
+					    <img src = "${rootURL}/plugin/yappy/images/yappy.png" class = "footerIcon" /> Yappy ${it.version}.
+					</div>
 				</div>
 			</div>			
 		</j:otherwise> 

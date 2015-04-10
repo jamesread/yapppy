@@ -1,12 +1,14 @@
 package com.example.yappy.checkers;
 
-import com.example.yappy.Checker;
+import com.example.yappy.SimpleChecker;
 import com.example.yappy.Issue;
 import com.example.yappy.Issue.Severity;
 import com.example.yappy.Scanner;
 import com.example.yappy.Dashboard;
+import hudson.Extension;
 
-public class CheckerConsiderFoldersPlugin extends Checker {
+@Extension
+public class CheckerConsiderFoldersPlugin extends SimpleChecker {
 	@Override
 	public void checkRoot(Scanner scanner, Dashboard dashboard) {
 		if (dashboard.getItems().size() >= 5) {

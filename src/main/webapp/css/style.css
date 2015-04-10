@@ -55,3 +55,22 @@ button:disabled {
 	border: 1px solid #d2d2d2;
 	cursor: not-allowed;
 }
+
+.exception {
+    background-color: salmon;
+    font-family: monospace;
+    padding: 1em;
+}
+
+.footer div {
+    padding: 1em;
+}
+
+.footerIcon {
+    width: 32px;
+}
+
+.pluginInfo {
+    text-align: right;
+    border-top: 1px solid #f0f0f0;
+}

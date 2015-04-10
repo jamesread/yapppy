@@ -1,5 +1,7 @@
 package com.example.yappy;
 
+import com.example.yappy.checkers.CheckerBase;
+
 public class Util {
 	public static String camelCaseToHypenated(String input) {
 		StringBuilder sb = new StringBuilder();
@@ -18,7 +20,11 @@ public class Util {
 		return sb.toString();
 	}
 
-	public static String hypenatedClassName(Checker checker) {
+	public static String hypenatedClassName(CheckerBase checker) {
 		return camelCaseToHypenated(checker.getClass().getSimpleName().toString());
 	}
+
+    public static String checkerName(CheckerBase checker) {
+        return hypenatedClassName(checker).replace("Checker-", "");
+    }
 }

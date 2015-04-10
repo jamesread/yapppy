@@ -13,17 +13,17 @@ public class Issue {
 	private final String description;
 	private Severity severity = Severity.WARNING;
 
-	private final Checker checker;
+	private final SimpleChecker checker;
 	private String checkerName = "system";
 
-	public Issue(Checker checker, Job job, String desc, Severity severity) {
+	public Issue(SimpleChecker checker, Job job, String desc, Severity severity) {
 		this(checker, desc, severity);
 
 		this.sourceUrl = job.getUrl();
 		this.sourceName = job.getName();
 	}
 
-	public Issue(Checker checker, String description, Severity severity) {
+	public Issue(SimpleChecker checker, String description, Severity severity) {
 		this.checker = checker;
 
 		this.description = description;
@@ -54,7 +54,7 @@ public class Issue {
 		if (this.checker == null) {
 			return this.checkerName;
 		} else {
-			return Util.hypenatedClassName(this.checker).replace("Checker-", "");
+			return Util.checkerName(this.checker);
 		}
 	}
 

@@ -40,6 +40,23 @@
     <url>http://github.com/jenkinsci/${project.artifactId}-plugin</url>
   </scm>
    -->
+
+  <build>
+	  <plugins>
+		<plugin>
+		  <groupId>org.apache.maven.plugins</groupId>
+		  <artifactId>maven-jar-plugin</artifactId>
+		  <configuration>
+			<archive>
+			  <manifest>
+				<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+			  </manifest>
+			</archive>
+		  </configuration>
+		</plugin>
+	  </plugins>
+  </build>
+
   <repositories>
     <repository>
       <id>repo.jenkins-ci.org</id>
@@ -61,5 +78,4 @@
     </dependency>
   </dependencies>
   -->
-
 </project>

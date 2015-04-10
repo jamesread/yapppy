@@ -1,5 +1,7 @@
 package com.example.yappy;
 
+import com.example.yappy.checkers.CheckerBase;
+import hudson.ExtensionPoint;
 import hudson.model.TopLevelItem;
 import hudson.model.Job;
 
@@ -13,16 +15,18 @@ import javax.xml.xpath.XPathFactory;
 import org.apache.tools.ant.filters.StringInputStream;
 import org.w3c.dom.Document;
 
-public abstract class Checker {
-	public void check(Scanner scanner, TopLevelItem i) {
-	}
+public abstract class SimpleChecker implements CheckerBase {
+    public void check(Scanner scanner, TopLevelItem i) {
 
-	public void checkJob(Scanner scanner, Job job) {
-	}
+    }
 
-	public void checkRoot(Scanner scanner, Dashboard dashboard) {
+    public void checkJob(Scanner scanner, Job job) {
 
-	}
+    }
+
+    public void checkRoot(Scanner scanner, Dashboard dashboard) {
+
+    }
 
 	protected String getJobConfig(Job job) {
 		try {
