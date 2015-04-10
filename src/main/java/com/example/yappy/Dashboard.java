@@ -51,4 +51,8 @@ public class Dashboard extends ListView {
 
 		return issues;
 	}
+
+	public String getVersion() {
+		return "?.?.?";
+	}
 }

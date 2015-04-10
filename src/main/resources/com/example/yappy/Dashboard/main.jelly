@@ -56,6 +56,10 @@
 					</j:forEach>
 					</tbody>
 				</table>
+
+				<div class = "footer">
+					Yappy ${it.version}.
+				</div>
 			</div>			
 		</j:otherwise> 
 	</j:choose>
