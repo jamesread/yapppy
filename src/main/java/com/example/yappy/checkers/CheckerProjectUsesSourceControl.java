@@ -12,7 +12,7 @@ import com.example.yappy.Scanner;
 public class CheckerProjectUsesSourceControl extends SimpleChecker {
 	@Override
 	public void checkJob(Scanner scanner, Job job) {
-		if (this.jobConfigXpath(job, "/maven2-moduleset/scm/@class").contains("Null")) {
+		if (this.jobConfigXpath(job, "/*/scm/@class").contains("Null")) {
 			Issue i = new Issue(this, job, "This project has no form of source control.", Severity.WARNING);
 			scanner.addIssue(i);
 		}
