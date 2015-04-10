@@ -106,7 +106,7 @@ public class Dashboard extends ListView {
 
         if (jarVersion == null || jarVersion.isEmpty()) {
             return "???";
-        } else {  
+        } else {
             return jarVersion;
         }
 	}
