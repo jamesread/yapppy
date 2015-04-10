@@ -58,7 +58,7 @@
 				</table>
 
 				<div class = "footer">
-					Yappy ${it.version}.
+					${it.issues.length} issues found. Yappy ${it.version}.
 				</div>
 			</div>			
 		</j:otherwise> 
