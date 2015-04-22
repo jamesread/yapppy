@@ -1,8 +1,7 @@
 package com.example.yappy;
 
-import com.example.yappy.checkers.CheckerBase;
-import hudson.ExtensionPoint;
 import hudson.model.TopLevelItem;
+import hudson.model.FreeStyleProject;
 import hudson.model.Job;
 
 import java.io.IOException;
@@ -15,18 +14,27 @@ import javax.xml.xpath.XPathFactory;
 import org.apache.tools.ant.filters.StringInputStream;
 import org.w3c.dom.Document;
 
+import com.example.yappy.checkers.CheckerBase;
+
 public abstract class SimpleChecker implements CheckerBase {
-    public void check(Scanner scanner, TopLevelItem i) {
+	@Override
+	public void check(Scanner scanner, TopLevelItem i) {
 
-    }
+	}
 
-    public void checkJob(Scanner scanner, Job job) {
+	@Override
+	public void checkJob(Scanner scanner, Job job) {
 
-    }
+	}
 
-    public void checkRoot(Scanner scanner, Dashboard dashboard) {
+	@Override
+	public void checkProject(Scanner scanner, FreeStyleProject i) {
+	}
 
-    }
+	@Override
+	public void checkRoot(Scanner scanner, Dashboard dashboard) {
+
+	}
 
 	protected String getJobConfig(Job job) {
 		try {
