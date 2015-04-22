@@ -30,7 +30,13 @@ public class CheckerGithubProjectBuildsOnCommit extends SimpleChecker {
 						String projectUrl = this.jobConfigXpath(project, "/project/properties/com.coravy.hudson.plugins.github.GithubProjectProperty/projectUrl/text()");
 
 						if (projectUrl.isEmpty()) {
-							new Issue(this, "This is a GitHub project, but the project URL is not configured. Should be: " + projectUrl, Severity.INFO).addTo(scanner);
+							new Issue(this, project, "This is a GitHub project, but the project URL is not configured.", Severity.WARNING).addTo(scanner);
+						}
+
+						String buildOnCommit = this.jobConfigXpath(project, "boolean(/project/triggers/com.cloudbees.jenkins.GitHubPushTrigger)");
+
+						if (buildOnCommit.equals("false")) {
+							new Issue(this, project, "This GitHub project, but is not set to build on commits to GitHub.", Severity.INFO).addTo(scanner);
 						}
 					}
 				}
