@@ -71,7 +71,7 @@
 
 				<div class = "footer">
 				    <div class = "summary">
-					    <strong>${it.issues.size()}</strong> issues found, <strong>${it.checkers.size()}</strong> scanning <abbr title = "Checkers: ${it.checkerList}">checkers</abbr> were run.
+					    <strong>${it.issues.size()}</strong> issues found, <strong>${it.checkers.size()}</strong> scanning <abbr title = "${it.checkerList}">checkers</abbr> were run.
 					</div>
 
                     <div class = "pluginInfo">

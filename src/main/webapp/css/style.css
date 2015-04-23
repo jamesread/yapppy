@@ -74,3 +74,7 @@ button:disabled {
     text-align: right;
     border-top: 1px solid #f0f0f0;
 }
+
+abbr {
+	border-bottom: 1px dotted black;
+}
