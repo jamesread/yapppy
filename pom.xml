@@ -11,7 +11,7 @@
   </parent>
   <groupId>com.example</groupId>
   <artifactId>yappy</artifactId>
-  <version>1.1-SNAPSHOT</version>
+  <version>1.2</version>
   <packaging>hpi</packaging>
 
   <name>Yappy</name>
