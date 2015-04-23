@@ -1,27 +1,29 @@
 package com.example.yappy;
 
-import com.example.yappy.checkers.CheckerBase;
 import hudson.Extension;
-import hudson.model.ListView;
+import hudson.model.Item;
+import hudson.model.Items;
+import hudson.model.TopLevelItem;
+import hudson.model.Descriptor.FormException;
+import hudson.model.View;
 import hudson.model.ViewDescriptor;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
-import jenkins.model.ModelObjectWithContextMenu.ContextMenu;
+import javax.servlet.ServletException;
 
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
 import com.example.yappy.Issue.Severity;
-import sun.tools.jar.resources.jar;
+import com.example.yappy.checkers.CheckerBase;
 
 @Extension
-public class Dashboard extends ListView {
-    private Exception exception;
-    private Vector<Issue> issues = new Vector<Issue>();
-    private Scanner scanner = new Scanner();
-
+public class Dashboard extends View {
 	@Extension
 	public static final class DescriptorImpl extends ViewDescriptor {
 		@Override
@@ -30,84 +32,102 @@ public class Dashboard extends ListView {
 		}
 	}
 
+	private Exception exception;
+	private Vector<Issue> issues = new Vector<Issue>();
+
+	private Scanner scanner = new Scanner();
+
 	public Dashboard() {
 		super("Yappy");
 
-        init();
+		this.init();
 	}
 
 	@DataBoundConstructor
 	public Dashboard(String name) {
 		super(name);
 
-        init();
+		this.init();
 	}
-
-    private void init() {
-        System.out.println("Dashboard constructed");
-    }
 
 	@Override
-	public ContextMenu doChildrenContextMenu(StaplerRequest arg0, StaplerResponse arg1) throws Exception {
-		ContextMenu menu = super.doChildrenContextMenu(arg0, arg1);
-
-		menu.add(new Button());
-
-		return menu;
+	public boolean contains(TopLevelItem arg0) {
+		return false;
 	}
 
-    public String getException() {
-        if (this.exception == null) {
-            return "";
-        } else {
-            exception.printStackTrace();
+	@Override
+	public Item doCreateItem(StaplerRequest arg0, StaplerResponse arg1) throws IOException, ServletException {
+		return null;
+	}
 
-            return "An exception of type " + this.exception.getClass() + " occoured in " + exception.getStackTrace()[0].getClassName() + ":" + exception.getStackTrace()[0].getLineNumber() + " when Yappy was performing a scan. This exception has been printed to the jenkins log.";
-        }
-    }
+	public String getCheckerList() {
+		StringBuilder sb = new StringBuilder();
 
-    public Scanner getNewScanner() {
-        System.out.println("getNewScanner - starting a new scan");
+		for (CheckerBase checker : this.getCheckers()) {
+			sb.append(Util.checkerName(checker));
+			sb.append("\n");
+		}
 
-        this.scanner = new Scanner();
+		return sb.toString();
+	}
 
-        try {
-            this.issues = scanner.scan(this);
-        } catch (Exception e) {
-            this.exception = e;
-        }
+	public Vector<CheckerBase> getCheckers() {
+		return this.scanner.getCheckers();
+	}
 
-        issues.add(new Issue("quality-warning", "Yappy is alpha quality software at the moment.", Severity.INFO));
+	public String getException() {
+		if (this.exception == null) {
+			return "";
+		} else {
+			this.exception.printStackTrace();
 
-        return scanner;
-    }
-
-    public Vector<CheckerBase> getCheckers() {
-        return this.scanner.getCheckers();
-    }
-
-    public String getCheckerList() {
-        StringBuilder sb = new StringBuilder();
-
-        for (CheckerBase checker : this.getCheckers()) {
-            sb.append(Util.checkerName(checker));
-            sb.append("\n");
-        }
-
-        return sb.toString();
-    }
+			return "An exception of type " + this.exception.getClass() + " occoured in " + this.exception.getStackTrace()[0].getClassName() + ":" + this.exception.getStackTrace()[0].getLineNumber() + " when Yappy was performing a scan. This exception has been printed to the jenkins log.";
+		}
+	}
 
 	public Vector<Issue> getIssues() {
-        return this.issues;
+		return this.issues;
+	}
+
+	@Override
+	public List<TopLevelItem> getItems() {
+		ArrayList<TopLevelItem> items = new ArrayList<TopLevelItem>();
+		items.addAll(Items.getAllItems(this.getOwnerItemGroup(), TopLevelItem.class));
+
+		return items;
+	}
+
+	public Scanner getNewScanner() {
+		System.out.println("getNewScanner - starting a new scan");
+
+		this.scanner = new Scanner();
+
+		try {
+			this.issues = this.scanner.scan(this);
+		} catch (Exception e) {
+			this.exception = e;
+		}
+
+		this.issues.add(new Issue("quality-warning", "Yappy is alpha quality software at the moment.", Severity.INFO));
+
+		return this.scanner;
 	}
 
 	public String getVersion() {
 		String jarVersion = this.getClass().getPackage().getImplementationVersion();
 
-        if (jarVersion == null || jarVersion.isEmpty()) {
-            return "???";
-        } else {
-            return jarVersion;
-        }
+		if ((jarVersion == null) || jarVersion.isEmpty()) {
+			return "???";
+		} else {
+			return jarVersion;
+		}
+	}
+
+	private void init() {
+		System.out.println("Dashboard constructed");
+	}
+
+	@Override
+	protected void submit(StaplerRequest arg0) throws IOException, ServletException, FormException {
 	}
 }

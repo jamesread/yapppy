@@ -18,8 +18,6 @@ public class CheckerGithubProjectBuildsOnCommit extends SimpleChecker {
 	public void checkProject(Scanner scanner, FreeStyleProject project) {
 		FreeStyleBuild build = project.getLastBuild();
 
-		System.out.println("buld on commit");
-
 		if (build != null) {
 			FilePath workspace = build.getWorkspace();
 			FilePath gitconfig = new FilePath(workspace, ".git/config");
