@@ -20,6 +20,11 @@ public class CheckerGithubProjectBuildsOnCommit extends SimpleChecker {
 
 		if (build != null) {
 			FilePath workspace = build.getWorkspace();
+
+			if (workspace == null) {
+				return;
+			}
+
 			FilePath gitconfig = new FilePath(workspace, ".git/config");
 
 			try {
