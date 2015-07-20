@@ -11,7 +11,7 @@ public class Button implements Action {
 
 	@Override
 	public String getDisplayName() {
-		return "Yappy";
+		return "Yappy"; 
 	}
 
 	@Override
@@ -21,6 +21,6 @@ public class Button implements Action {
 
 	@Override
 	public String getUrlName() {
-		return "";
+		return ""; 
 	}
 }

@@ -22,8 +22,10 @@ import org.kohsuke.stapler.StaplerResponse;
 import com.example.yappy.Issue.Severity;
 import com.example.yappy.checkers.CheckerBase;
 
-@Extension
+@Extension 
 public class Dashboard extends View {
+	public static ProjectPipelineRegistry pipelineRegistery = new ProjectPipelineRegistry();  
+
 	@Extension
 	public static final class DescriptorImpl extends ViewDescriptor {
 		@Override
@@ -87,7 +89,7 @@ public class Dashboard extends View {
 
 	public Vector<Issue> getIssues() {
 		return this.issues;
-	}
+	}  
 
 	@Override
 	public List<TopLevelItem> getItems() {
@@ -98,6 +100,7 @@ public class Dashboard extends View {
 	}
 
 	public Scanner getNewScanner() {
+		pipelineRegistery.clear();
 		System.out.println("getNewScanner - starting a new scan");
 
 		this.scanner = new Scanner();
@@ -125,6 +128,10 @@ public class Dashboard extends View {
 
 	private void init() {
 		System.out.println("Dashboard constructed");
+	}
+	 
+	public String getPipelines() {
+		return "Pipeline 1: " + Dashboard.pipelineRegistery.asString(); 
 	}
 
 	@Override

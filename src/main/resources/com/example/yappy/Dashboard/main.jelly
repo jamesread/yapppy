@@ -68,6 +68,9 @@
 					</j:forEach>
 					</tbody>
 				</table>
+				
+				<h2>Project pipelines</h2>
+				${it.pipelines}  
 
 				<div class = "footer">
 				    <div class = "summary">
