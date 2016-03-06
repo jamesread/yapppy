@@ -21,6 +21,8 @@ public class BogoTree<T> implements Iterable<T> {
 		} 
 	}
 
+	public void clear() {}
+
 	@Override
 	public Iterator<T> iterator() {
 		return new Iterator<T>() {
