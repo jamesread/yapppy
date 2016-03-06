@@ -23,7 +23,6 @@ public class ProjectPipelineRegistry {
 	}
 
 	public void clear() {
-		list.clear();
+		tree.clear();
 	}
-
 }
