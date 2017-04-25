@@ -1,1 +1,4 @@
-new inst detail
+<?jelly escape-by-default='true'?>
+<div>
+	new inst detail
+</div>
