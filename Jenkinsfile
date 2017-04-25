@@ -1,5 +1,8 @@
 node {
-	stage "Build"
-	checkout scm
-	sh "mvn install"
+	stage("Build") {
+		steps {
+			checkout scm
+			sh "mvn install"
+		}
+	}
 }
